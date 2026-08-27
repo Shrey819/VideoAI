@@ -1,0 +1,20 @@
+{
+  "name": "antigravity-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n API,WEB -c cyan,magenta \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:web": "npm --workspace=@antigravity/web run dev",
+    "dev:api": "npm --workspace=@antigravity/api run dev",
+    "build:packages": "npm --workspace=@antigravity/shared run build && npm --workspace=@antigravity/prompts run build && npm --workspace=@antigravity/ffmpeg run build",
+    "build": "npm run build:packages && npm --workspace=@antigravity/api run build && npm --workspace=@antigravity/web run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.4.5"
+  }
+}
